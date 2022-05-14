@@ -1,0 +1,117 @@
+{
+  "uuid": "2f0dc0e2-922f-4502-8e63-0bf3a6b8864b",
+  "lastMigration": 19,
+  "name": "MBS API",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "ac82db83-a6e5-4fa3-90f9-88054760f5b4",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "v1/auth/login",
+      "responses": [
+        {
+          "uuid": "109fab5d-2227-45f3-a9da-58062c7019e0",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid username or password\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Log in failed",
+          "headers": [
+            {
+              "key": "x-api-key",
+              "value": "xxx-api-key"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "test",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test_12345",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "91d00e9c-e453-412f-b12e-19def0bc06a3",
+          "body": "{\n  \"status\":\"sucess\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"a21abffb-c97f-44a4-b4fe-583ccd22a06e\",\n    \"role\": \"admin\",\n    \"name\": \"ด.ต.ชัชชัย ชาติสมบัติ\",\n    \"profile_image_url\": \"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/07/Thailand-Prayut-Chan-ocha-Prime-Minister-July-16-2019-e1639525608617.jpg?fit=1200%2C797&ssl=1\",\n    \"access_token\": \"xxxxxxx\",\n    \"refresh_token\": \"xxxxxx\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Login Success",
+          "headers": [
+            {
+              "key": "x-api-key",
+              "value": "xxx-api-key"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "test",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test_1234",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}
