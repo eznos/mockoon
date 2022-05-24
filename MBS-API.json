@@ -9,7 +9,7 @@
   "routes": [
     {
       "uuid": "ac82db83-a6e5-4fa3-90f9-88054760f5b4",
-      "documentation": "",
+      "documentation": "Login",
       "method": "post",
       "endpoint": "v1/auth/login",
       "responses": [
@@ -18,7 +18,7 @@
           "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid username or password\"\n}",
           "latency": 0,
           "statusCode": 401,
-          "label": "Log in failed",
+          "label": "Login failed",
           "headers": [
             {
               "key": "x-api-key",
@@ -46,20 +46,42 @@
           "fallbackTo404": false
         },
         {
-          "uuid": "91d00e9c-e453-412f-b12e-19def0bc06a3",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"a21abffb-c97f-44a4-b4fe-583ccd22a06e\",\n    \"role\": \"admin\",\n    \"rank\": \"ด.ต.\",\n    \"first_name\":\"ชัชชัย\",\n    \"last_name\":\"ชาติสมบัติ\",\n    \"profile_image_url\": \"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/07/Thailand-Prayut-Chan-ocha-Prime-Minister-July-16-2019-e1639525608617.jpg?fit=1200%2C797&ssl=1\",\n    \"access_token\": \"xxxxxxx\",\n    \"refresh_token\": \"xxxxxx\"\n  }\n}",
+          "uuid": "e9ec62cb-c743-448d-97d2-fa7f3f619242",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
           "latency": 0,
-          "statusCode": 200,
-          "label": "Login Success",
-          "headers": [
-            {
-              "key": "x-api-key",
-              "value": "xxx-api-key"
-            }
-          ],
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
           "filePath": "",
           "sendFileAsBody": false,
           "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "91d00e9c-e453-412f-b12e-19def0bc06a3",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"01G3VC0CM6G6C42Q8SGE05ZXP1\",\n    \"role\": \"admin\",\n    \"rank\": \"ด.ต.\",\n    \"first_name\":\"ชัชชัย\",\n    \"last_name\":\"ชาติสมบัติ\",\n    \"profile_image_url\": \"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/07/Thailand-Prayut-Chan-ocha-Prime-Minister-July-16-2019-e1639525608617.jpg?fit=1200%2C797&ssl=1\",\n    \"access_token\": \"xxx-access-token\",\n    \"refresh_token\": \"xxx-refresh-token\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Login success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
             {
               "target": "body",
               "modifier": "username",
@@ -79,19 +101,20 @@
         },
         {
           "uuid": "c6d4411b-373f-4c30-9d40-e25a601c61ae",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"a21abffb-c97f-44a4-b4fe-583ccdjfias5\",\n    \"role\": \"admin\",\n    \"rank\": \"พล.ต.ต.\",\n    \"first_name\":\"พงศ์\",\n    \"last_name\":\"เสนาวงศ์\",\n    \"profile_image_url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1ei76vvP_8HOUD0veoDarI4Vv8mYANp_T7A&usqp=CAU\",\n    \"access_token\": \"xxxxxxx\",\n    \"refresh_token\": \"xxxxxx\"\n  }\n}",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"01G3VC0T2MYBM6HA78JS1B1CW0\",\n    \"role\": \"admin\",\n    \"rank\": \"พล.ต.ต.\",\n    \"first_name\":\"พงศ์\",\n    \"last_name\":\"เสนาวงศ์\",\n    \"profile_image_url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1ei76vvP_8HOUD0veoDarI4Vv8mYANp_T7A&usqp=CAU\",\n    \"access_token\": \"xxx-access-token\",\n    \"refresh_token\": \"xxx-refresh-token\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Login Success (copy)",
-          "headers": [
-            {
-              "key": "x-api-key",
-              "value": "xxx-api-key"
-            }
-          ],
+          "label": "Login success",
+          "headers": [],
           "filePath": "",
           "sendFileAsBody": false,
           "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
             {
               "target": "body",
               "modifier": "username",
@@ -106,6 +129,422 @@
             }
           ],
           "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "31748910-1fa7-4f5a-95b9-674b5546b66b",
+      "documentation": "Logout",
+      "method": "post",
+      "endpoint": "v1/auth/logout",
+      "responses": [
+        {
+          "uuid": "3ecb5974-3000-4e8f-9394-3dc721575da4",
+          "body": "{\n  \"status\": \"not_found\",\n  \"status_code\": 404,\n  \"error_message\": \"session not found\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Session not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "6037b921-b25e-456a-9ac4-f73c3ee9de16",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "d25360ed-367a-487e-8b02-9fc8672867d8",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Logout success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "cbe83c4d-7262-457b-8ae7-b60c334ad740",
+      "documentation": "Refresh Token",
+      "method": "post",
+      "endpoint": "v1/auth/token",
+      "responses": [
+        {
+          "uuid": "c62ad9fb-0375-4d63-b988-88677462ed21",
+          "body": "{\n  \"status\": \"not_found\",\n  \"status_code\": 404,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "x-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "c171c1aa-0aa7-48da-8316-f6cdfe3d204f",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "c8155d09-cb23-4609-a04b-43708f27db31",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"01G3VC0CM6G6C42Q8SGE05ZXP1\",\n    \"role\": \"admin\",\n    \"rank\": \"ด.ต.\",\n    \"first_name\":\"ชัชชัย\",\n    \"last_name\":\"ชาติสมบัติ\",\n    \"profile_image_url\": \"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/07/Thailand-Prayut-Chan-ocha-Prime-Minister-July-16-2019-e1639525608617.jpg?fit=1200%2C797&ssl=1\",\n    \"access_token\": \"xxx-access-token\",\n    \"refresh_token\": \"xxx-refresh-token\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Refesh token success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "26b36959-3369-4157-90e6-e4c378aff369",
+      "documentation": "Forgot Password",
+      "method": "post",
+      "endpoint": "v1/auth/:email/forgot-password",
+      "responses": [
+        {
+          "uuid": "bcd22fd9-8c03-4b92-9c69-0d9df612552d",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Send  recovery code success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "email",
+              "value": "test@email.com",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "383aa2ba-13f5-4e4f-ac53-05173352d2bd",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"invalid email\"\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Invalid email",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "email",
+              "value": "xxxx",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "ed0d9af8-3e61-4947-ba1f-16590f7f15ea",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            },
+            {
+              "target": "params",
+              "modifier": "email",
+              "value": "test@email.com",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "6b1b0e81-7ddd-4424-b19d-571a0dd4e6e4",
+      "documentation": "Reset Password",
+      "method": "patch",
+      "endpoint": "v1/auth/:email/password",
+      "responses": [
+        {
+          "uuid": "445dbd13-5bc1-4559-bd7b-1860911d7340",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Reset password success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "email",
+              "value": "test@email.com",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "type",
+              "value": "RESET",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "recovery_code",
+              "value": "930823",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test1234",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "47018d17-a547-49d9-925f-5c673d8ee5ed",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            },
+            {
+              "target": "params",
+              "modifier": "email",
+              "value": "test@email.com",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "type",
+              "value": "RESET",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "recovery_code",
+              "value": "930823",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test1234",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "433a3d0b-8bb9-41f9-a161-ebdb1f5eec35",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"invalid recovery code\"\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Recovery code invalid or expired",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "email",
+              "value": "test@email.com",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "type",
+              "value": "RESET",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "recovery_code",
+              "value": "333333",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test1234",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false
         }
