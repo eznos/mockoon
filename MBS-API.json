@@ -47,7 +47,7 @@
         },
         {
           "uuid": "91d00e9c-e453-412f-b12e-19def0bc06a3",
-          "body": "{\n  \"status\":\"sucess\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"a21abffb-c97f-44a4-b4fe-583ccd22a06e\",\n    \"role\": \"admin\",\n    \"name\": \"ด.ต.ชัชชัย ชาติสมบัติ\",\n    \"profile_image_url\": \"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/07/Thailand-Prayut-Chan-ocha-Prime-Minister-July-16-2019-e1639525608617.jpg?fit=1200%2C797&ssl=1\",\n    \"access_token\": \"xxxxxxx\",\n    \"refresh_token\": \"xxxxxx\"\n  }\n}",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"a21abffb-c97f-44a4-b4fe-583ccd22a06e\",\n    \"role\": \"admin\",\n    \"rank\": \"ด.ต.\",\n    \"first_name\":\"ชัชชัย\",\n    \"last_name\":\"ชาติสมบัติ\",\n    \"profile_image_url\": \"https://i0.wp.com/asiatimes.com/wp-content/uploads/2019/07/Thailand-Prayut-Chan-ocha-Prime-Minister-July-16-2019-e1639525608617.jpg?fit=1200%2C797&ssl=1\",\n    \"access_token\": \"xxxxxxx\",\n    \"refresh_token\": \"xxxxxx\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Login Success",
@@ -64,6 +64,38 @@
               "target": "body",
               "modifier": "username",
               "value": "test",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test_1234",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "c6d4411b-373f-4c30-9d40-e25a601c61ae",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"a21abffb-c97f-44a4-b4fe-583ccdjfias5\",\n    \"role\": \"admin\",\n    \"rank\": \"พล.ต.ต.\",\n    \"first_name\":\"พงศ์\",\n    \"last_name\":\"เสนาวงศ์\",\n    \"profile_image_url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1ei76vvP_8HOUD0veoDarI4Vv8mYANp_T7A&usqp=CAU\",\n    \"access_token\": \"xxxxxxx\",\n    \"refresh_token\": \"xxxxxx\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Login Success (copy)",
+          "headers": [
+            {
+              "key": "x-api-key",
+              "value": "xxx-api-key"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "test1",
               "operator": "equals"
             },
             {
@@ -100,6 +132,18 @@
     {
       "key": "Content-Type",
       "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
     }
   ],
   "proxyReqHeaders": [
