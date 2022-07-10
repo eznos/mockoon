@@ -1,6 +1,6 @@
 {
   "uuid": "2f0dc0e2-922f-4502-8e63-0bf3a6b8864b",
-  "lastMigration": 19,
+  "lastMigration": 20,
   "name": "MBS API",
   "endpointPrefix": "",
   "latency": 0,
@@ -43,7 +43,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         },
         {
           "uuid": "e9ec62cb-c743-448d-97d2-fa7f3f619242",
@@ -64,7 +65,8 @@
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         },
         {
           "uuid": "91d00e9c-e453-412f-b12e-19def0bc06a3",
@@ -97,11 +99,12 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         },
         {
           "uuid": "c6d4411b-373f-4c30-9d40-e25a601c61ae",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"01G3VC0T2MYBM6HA78JS1B1CW0\",\n    \"role\": \"admin\",\n    \"rank\": \"พล.ต.ต.\",\n    \"first_name\":\"พงศ์\",\n    \"last_name\":\"เสนาวงศ์\",\n    \"profile_image_url\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1ei76vvP_8HOUD0veoDarI4Vv8mYANp_T7A&usqp=CAU\",\n    \"access_token\": \"xxx-access-token\",\n    \"refresh_token\": \"xxx-refresh-token\"\n  }\n}",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"user_id\": \"01G3VC0T2MYBM6HA78JS1B1CW0\",\n    \"role\": \"admin\",\n    \"rank\": \"พล.ต.ต.\",\n    \"affiliation\": \"ผบช.ภ.3\",\n    \"first_name\":\"พงศ์\",\n    \"last_name\":\"เสนาวงศ์\",\n    \"profile_image_url\": \"https://www.techhub.in.th/wp-content/uploads/2021/05/118283916_b19c5a1f-162b-410b-8169-f58f0d153752.jpg\",\n    \"access_token\": \"xxx-access-token\",\n    \"refresh_token\": \"xxx-refresh-token\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Login success",
@@ -130,7 +133,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         }
       ],
       "enabled": true,
@@ -168,7 +172,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         },
         {
           "uuid": "6037b921-b25e-456a-9ac4-f73c3ee9de16",
@@ -189,7 +194,8 @@
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         },
         {
           "uuid": "d25360ed-367a-487e-8b02-9fc8672867d8",
@@ -216,7 +222,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
@@ -254,7 +261,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         },
         {
           "uuid": "c171c1aa-0aa7-48da-8316-f6cdfe3d204f",
@@ -281,7 +289,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         },
         {
           "uuid": "c8155d09-cb23-4609-a04b-43708f27db31",
@@ -308,7 +317,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
@@ -323,7 +333,7 @@
       "responses": [
         {
           "uuid": "bcd22fd9-8c03-4b92-9c69-0d9df612552d",
-          "body": "",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 204,\n}",
           "latency": 0,
           "statusCode": 204,
           "label": "Send  recovery code success",
@@ -346,7 +356,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         },
         {
           "uuid": "383aa2ba-13f5-4e4f-ac53-05173352d2bd",
@@ -373,7 +384,8 @@
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         },
         {
           "uuid": "ed0d9af8-3e61-4947-ba1f-16590f7f15ea",
@@ -400,7 +412,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
@@ -415,7 +428,7 @@
       "responses": [
         {
           "uuid": "445dbd13-5bc1-4559-bd7b-1860911d7340",
-          "body": "",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 204,\n}",
           "latency": 0,
           "statusCode": 204,
           "label": "Reset password success",
@@ -456,7 +469,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         },
         {
           "uuid": "47018d17-a547-49d9-925f-5c673d8ee5ed",
@@ -501,7 +515,8 @@
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
         },
         {
           "uuid": "433a3d0b-8bb9-41f9-a161-ebdb1f5eec35",
@@ -546,7 +561,142 @@
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "5b33433a-fc76-4f9e-85b4-b2c787fb4303",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "v1/dashboard/water",
+      "responses": [
+        {
+          "uuid": "556ebc3e-3579-4b2e-8168-820d402aaa81",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"type\": \"water\",\n  \"center\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"angtadang\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"suranarai\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get water succes",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "3b33066e-36da-4485-846e-220a3d58a1c3",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Get data failed",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "bba49a40-5291-4637-a4de-7d86ac1c4baf",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "v1/dashboard/electric",
+      "responses": [
+        {
+          "uuid": "26789922-593b-417b-b3a1-bf1d8687f808",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"type\": \"electricity\",\n  \"center\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"angtadang\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"suranarai\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get electric succes",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "e49c47e4-152d-42fb-bdf0-fabae6b63428",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "v1/dashboard/info-card",
+      "responses": [
+        {
+          "uuid": "92bc1bb8-d7fb-4b41-9da3-724e7d6fa2f0",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"total\": \"268\",\n    \"empty\": \"25\",\n    \"move_in\": \"42\",\n    \"move_out\": \"12\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get data success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "fa56fa35-e62c-45bc-891c-18f2461449c2",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "v1/table/resident",
+      "responses": [
+        {
+          "uuid": "4b26269e-b82a-4e06-b43b-8c07de074600",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\":\n    { \n      \"rank\": \"พล.ต.อ.\",\n      \"first_name\": \"ชัชชาช้า\",\n      \"last_name\": \"ชัชชาวาน\",\n      \"zone\": \"เขตสุรนารายณ์\",\n      \"building\": \"2/20\",\n      \"room\": \"2\",\n      \"water_group\": \"ป.1\",\n      \"water_no\": \"1234\",\n      \"water_meter_no\": \"1234\",\n      \"electricity_no\": \"200190919501\",\n      \"electricity_meter_no\": \"20019091950\",\n      \"room_type\": \"family_1\"\n    }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "get resident data succes",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "5b797562-d1f3-4a66-a5da-9861e1fbf94e",
+          "body": "{\n  \"status\": \"not_found\",\n  \"status_code\": 404,\n  \"error_message\": \"Data Not Found\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Data Not Found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
@@ -582,7 +732,7 @@
     },
     {
       "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With,x-api-key"
     }
   ],
   "proxyReqHeaders": [
