@@ -268,7 +268,7 @@
           "uuid": "c171c1aa-0aa7-48da-8316-f6cdfe3d204f",
           "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
           "latency": 0,
-          "statusCode": 200,
+          "statusCode": 401,
           "label": "Invalid api key",
           "headers": [],
           "filePath": "",
@@ -570,130 +570,85 @@
       "sequentialResponse": false
     },
     {
-      "uuid": "5b33433a-fc76-4f9e-85b4-b2c787fb4303",
-      "documentation": "",
+      "uuid": "44ecd07c-ddb0-4539-b7cc-819d02ad2756",
+      "documentation": "Overview",
       "method": "get",
-      "endpoint": "v1/dashboard/water",
+      "endpoint": "v1/overviews",
       "responses": [
         {
-          "uuid": "556ebc3e-3579-4b2e-8168-820d402aaa81",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"type\": \"water\",\n  \"center\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"angtadang\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"suranarai\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  }\n}",
+          "uuid": "30fd8fed-cfed-4b97-8938-5bdc243f08e5",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"summary\": {\n      \"residents\": {\n        \"total\": 268,\n        \"move_in_last_month\": 42,\n        \"move_out_last_month\": 12\n      },\n      \"rooms\": {\n        \"empty\": 25\n      },\n      \"billings\": {\n        \"electricity\": {\n          \"zones\": {\n            \"center\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"angtadang\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"suranarai\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            }\n          }\n        },\n        \"water\": {\n          \"zones\": {\n            \"center\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"angtadang\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"suranarai\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            }\n          }\n        }\n      }\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Get water succes",
+          "label": "Get overview data success",
           "headers": [],
           "filePath": "",
           "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "3b33066e-36da-4485-846e-220a3d58a1c3",
-          "body": "{}",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Get data failed",
-          "headers": [],
-          "filePath": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false
-        }
-      ],
-      "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
-    },
-    {
-      "uuid": "bba49a40-5291-4637-a4de-7d86ac1c4baf",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "v1/dashboard/electric",
-      "responses": [
+        },
         {
-          "uuid": "26789922-593b-417b-b3a1-bf1d8687f808",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"type\": \"electricity\",\n  \"center\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"angtadang\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  },\n   \"suranarai\": {\n    \"jan\": \"4564\",\n    \"feb\": \"5345\",\n    \"mar\": \"7894\",\n    \"apr\": \"2005\",\n    \"may\": \"4562\",\n    \"jun\": \"5821\",\n    \"jul\": \"2354\",\n    \"aug\": \"2548\",\n    \"sep\": \"1535\",\n    \"oct\": \"4521\",\n    \"nov\": \"4568\",\n    \"dec\": \"8866\"\n  }\n}",
+          "uuid": "b8a79a8e-9c7a-4ec8-b5b7-458a7a643364",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
           "latency": 0,
-          "statusCode": 200,
-          "label": "Get electric succes",
+          "statusCode": 401,
+          "label": "Invalid api key",
           "headers": [],
           "filePath": "",
           "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        }
-      ],
-      "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
-    },
-    {
-      "uuid": "e49c47e4-152d-42fb-bdf0-fabae6b63428",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "v1/dashboard/info-card",
-      "responses": [
-        {
-          "uuid": "92bc1bb8-d7fb-4b41-9da3-724e7d6fa2f0",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"total\": \"268\",\n    \"empty\": \"25\",\n    \"move_in\": \"42\",\n    \"move_out\": \"12\"\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Get data success",
-          "headers": [],
-          "filePath": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        }
-      ],
-      "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
-    },
-    {
-      "uuid": "fa56fa35-e62c-45bc-891c-18f2461449c2",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "v1/table/resident",
-      "responses": [
-        {
-          "uuid": "4b26269e-b82a-4e06-b43b-8c07de074600",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\":\n    { \n      \"rank\": \"พล.ต.อ.\",\n      \"first_name\": \"ชัชชาช้า\",\n      \"last_name\": \"ชัชชาวาน\",\n      \"zone\": \"เขตสุรนารายณ์\",\n      \"building\": \"2/20\",\n      \"room\": \"2\",\n      \"water_group\": \"ป.1\",\n      \"water_no\": \"1234\",\n      \"water_meter_no\": \"1234\",\n      \"electricity_no\": \"200190919501\",\n      \"electricity_meter_no\": \"20019091950\",\n      \"room_type\": \"family_1\"\n    }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "get resident data succes",
-          "headers": [],
-          "filePath": "",
-          "sendFileAsBody": false,
-          "rules": [],
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
         },
         {
-          "uuid": "5b797562-d1f3-4a66-a5da-9861e1fbf94e",
-          "body": "{\n  \"status\": \"not_found\",\n  \"status_code\": 404,\n  \"error_message\": \"Data Not Found\"\n}",
+          "uuid": "e69f218a-a86e-48ed-a782-5c33f2b05133",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
           "latency": 0,
-          "statusCode": 404,
-          "label": "Data Not Found",
+          "statusCode": 401,
+          "label": "Invalid refresh token",
           "headers": [],
           "filePath": "",
           "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false
