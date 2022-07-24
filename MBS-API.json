@@ -570,6 +570,127 @@
       "sequentialResponse": false
     },
     {
+      "uuid": "4b48a288-3c65-4b37-8ad8-7048be1a9164",
+      "documentation": "Register",
+      "method": "post",
+      "endpoint": "v1/auth/registers",
+      "responses": [
+        {
+          "uuid": "c0203663-f2a4-4dc5-90d1-9b9d3beba48a",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201,\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Register success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "rank",
+              "value": "พล.ต.อ",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "affiliation",
+              "value": "ผบช.ภ.3",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "ทดสอบ",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "ทดสอบ",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "test@example.com",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "phone_number",
+              "value": "0999999999",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "gender",
+              "value": "male",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "test",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "test1234",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "profile_url",
+              "value": "https://www.pngall.com/wp-content/uploads/2016/03/Troll-Face-Meme-PNG.png",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "890f8554-b8c4-4617-ae49-f5191f93c26b",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
       "uuid": "44ecd07c-ddb0-4539-b7cc-819d02ad2756",
       "documentation": "Overview",
       "method": "get",
