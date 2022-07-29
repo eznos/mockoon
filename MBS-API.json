@@ -778,6 +778,135 @@
       "enabled": true,
       "randomResponse": false,
       "sequentialResponse": false
+    },
+    {
+      "uuid": "9b003ffb-f299-4267-9733-b6fd06e39c82",
+      "documentation": "Get billings (Water)",
+      "method": "get",
+      "endpoint": "v1/billings/water",
+      "responses": [
+        {
+          "uuid": "95cd01d5-eb46-4d2c-8a18-6b0b8101983c",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"billings\": [\n      {\n        \"id\": \"28b03f51-fd0c-42fe-affd-28374333a4ad\",\n        \"rank\": \"พล.ต.อ.\",\n        \"first_name\": \"ชัชชาช้า\",\n        \"last_name\": \"ชัชชาวาน\",\n        \"zone\": \"เขตสุรนารายณ์\",\n        \"building\": \"2/20\",\n        \"room\": \"2\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"1234\",\n        \"meter_no\": \"1234\",\n        \"billing_cycle\": \"2022-03\",\n        \"unit\": 1,\n        \"price\": 30.0,\n        \"price_diff\": 50.0,\n        \"total_pay\": 80.0,\n        \"status\": \"draft\"\n      },\n      {\n        \"id\": \"49d7c651-3ed2-4ce3-b5dc-7705826867b8\",\n        \"rank\": \"ด.ต.หญิง\",\n        \"first_name\": \"ภัทรพร\",\n        \"last_name\": \"ศรีโอภาส\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"103\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"4567\",\n        \"meter_no\": \"4567\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 19.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 44.34,\n        \"status\": \"exported\"\n      },\n      {\n        \"id\": \"5cfc37d4-6258-4536-9f19-de4bd821a353\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"อมร \",\n        \"last_name\": \"ภูมพฤกษ์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"107\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"7540\",\n        \"meter_no\": \"7540\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 57.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 82.34,\n        \"status\": \"draft\"\n      },\n      {\n        \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"อดุล \",\n        \"last_name\": \"วงศ์ทอง\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"202\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"9856\",\n        \"meter_no\": \"9856\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"draft\"\n      },\n      {\n        \"id\": \"afef4eef-770b-4d85-80ee-5fd46854c063\",\n        \"rank\": \"ร.ต.ท.\",\n        \"first_name\": \"จรัส \",\n        \"last_name\": \"สิมฤทธิ์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"206\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"3214\",\n        \"meter_no\": \"3214\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"fd2724bf-9583-4c7e-9846-a152e546f844\",\n        \"rank\": \"ส.ต.อ.\",\n        \"first_name\": \"ธิชากร \",\n        \"last_name\": \"ผินดอน\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"305\",\n        \"water_zone\": \"ป.83\",\n        \"water_no\": \"5467\",\n        \"meter_no\": \"5467\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 76.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 101.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"e39b0ac2-f700-43e5-ac2e-37f23199706b\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"รุ่ง \",\n        \"last_name\": \"โฉมกิ่ง\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"402\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"8520\",\n        \"meter_no\": \"8520\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"378ae21e-b82f-4c35-8979-30125fd5bbd0\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"อนุชา \",\n        \"last_name\": \"ฝากชัยภูมิ\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"413\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"7845\",\n        \"meter_no\": \"7845\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 152.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 177.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"f24d9329-a0b8-4aa3-beba-b9db5e1aa0f6\",\n        \"rank\": \"ส.ต.อ.\",\n        \"first_name\": \"รัฐพนย์ \",\n        \"last_name\": \"เรื่องเรือ\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"504\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"3568\",\n        \"meter_no\": \"3568\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"dbb737de-7415-4775-a53b-a3fcb1b0c058\",\n        \"rank\": \"ร.ต.ท.\",\n        \"first_name\": \"อิทธิพล\",\n        \"last_name\": \"เพ็ญเติมพันธ์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"514\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"5568\",\n        \"meter_no\": \"5568\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"8e1e01cb-c0eb-4433-b5bd-3c57e1e5bec2\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"ไพโรจน์\",\n        \"last_name\": \"ทนปรางค์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"515\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"1123\",\n        \"meter_no\": \"1123\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 19.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 44.34,\n        \"status\": \"calculated\"\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all water billings",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "2022-07-29",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "e5be52e6-8af8-44fa-90bc-83963f383012",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"billings\": []\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all water billings - Not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "0261c2d8-f694-4754-ad18-0b23a2870d8b",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "38c44243-b823-4dad-8ce3-eb0da4ca4401",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
     }
   ],
   "proxyMode": false,
