@@ -808,7 +808,7 @@
     },
     {
       "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With, x-api-key"
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With, x-api-key, x-refresh-token"
     }
   ],
   "proxyReqHeaders": [
