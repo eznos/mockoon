@@ -1048,6 +1048,135 @@
       "enabled": true,
       "randomResponse": false,
       "sequentialResponse": false
+    },
+    {
+      "uuid": "5dc7d651-bab9-45db-a779-7f225f87c783",
+      "documentation": "Export water billings",
+      "method": "post",
+      "endpoint": "v1/billings/water/exports",
+      "responses": [
+        {
+          "uuid": "776b3174-d513-4898-9575-c07ef6402301",
+          "body": "",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Exported",
+          "headers": [],
+          "filePath": "/Users/yutthasard/Workspace/bms/mockoon/README.md",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "billings_id",
+              "value": "[\"193fd130-9e35-4ab0-9a0f-ef5a72b912eb\", \"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "254f75c8-3418-48d3-a5fe-b8ab695dd339",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"some record does not have calculated status\"\n}\n",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validate failed",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "billings_id",
+              "value": "[\"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "6ad137fa-e1f2-4773-83f9-9634a47afd47",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "98dd5745-b226-47ca-9675-f72fe283801c",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
     }
   ],
   "proxyMode": false,
