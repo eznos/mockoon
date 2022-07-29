@@ -907,6 +907,147 @@
       "enabled": true,
       "randomResponse": false,
       "sequentialResponse": false
+    },
+    {
+      "uuid": "7fcdde27-a8f8-4780-a858-05b945533327",
+      "documentation": "Calulate difference price of water billing",
+      "method": "post",
+      "endpoint": "v1/calculate/:waterZoneID",
+      "responses": [
+        {
+          "uuid": "2a9ae305-2bcb-4ece-a957-2c382faeaab8",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}\n",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Caculated",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "waterZoneID",
+              "value": "8986bce7-5831-48ad-bfb2-5d572d35a8b6",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "2022.22",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "46d66648-de82-4b28-9af1-6a5c51e6c6c8",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"some record does not have in_progress status\"\n}\n",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validate failed",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "waterZoneID",
+              "value": "9934143f-e5ff-45d8-a78b-bd6a330af6ad",
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "2022.22",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "48c833db-7b61-4e6a-b861-704e78377e0d",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "ca66241c-4be8-4d9c-a705-2b45a29c3aa6",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
     }
   ],
   "proxyMode": false,
