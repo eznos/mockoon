@@ -1084,7 +1084,7 @@
               "operator": "equals"
             }
           ],
-          "rulesOperator": "AND",
+          "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false
