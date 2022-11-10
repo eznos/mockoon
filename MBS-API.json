@@ -1,6 +1,6 @@
 {
   "uuid": "2f0dc0e2-922f-4502-8e63-0bf3a6b8864b",
-  "lastMigration": 20,
+  "lastMigration": 22,
   "name": "MBS API",
   "endpointPrefix": "",
   "latency": 0,
@@ -32,19 +32,21 @@
               "target": "body",
               "modifier": "username",
               "value": "test",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "password",
               "value": "test_12345",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": true
         },
         {
           "uuid": "e9ec62cb-c743-448d-97d2-fa7f3f619242",
@@ -60,7 +62,8 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -82,19 +85,22 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "username",
               "value": "test",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "password",
               "value": "test_1234",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -116,30 +122,88 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "username",
               "value": "test1",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "password",
               "value": "test_1234",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": false
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
+    },
+    {
+      "uuid": "83644da0-414c-4198-9a06-7dd6bee04808",
+      "documentation": "Login",
+      "method": "post",
+      "endpoint": "v1/auth/login-user",
+      "responses": [
+        {
+          "uuid": "f1b82d12-c945-496e-ad96-5ef100d5524f",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "84124274-d0ed-44fe-9526-36fcd250be12",
+          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"role\": \"user\",\n    \"access_token\": \"xxx-access-token\",\n    \"refresh_token\": \"xxx-refresh-token\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Login success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     },
     {
       "uuid": "31748910-1fa7-4f5a-95b9-674b5546b66b",
@@ -161,13 +225,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -189,7 +255,8 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -211,13 +278,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -227,8 +296,7 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "cbe83c4d-7262-457b-8ae7-b60c334ad740",
@@ -250,13 +318,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "x-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -278,13 +348,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -306,13 +378,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -322,8 +396,7 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "26b36959-3369-4157-90e6-e4c378aff369",
@@ -333,7 +406,7 @@
       "responses": [
         {
           "uuid": "bcd22fd9-8c03-4b92-9c69-0d9df612552d",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 204,\n}",
+          "body": "",
           "latency": 0,
           "statusCode": 204,
           "label": "Send  recovery code success",
@@ -345,13 +418,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "email",
               "value": "test@email.com",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -373,13 +448,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "email",
               "value": "xxxx",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -401,13 +478,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "email",
               "value": "test@email.com",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -417,8 +496,7 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "6b1b0e81-7ddd-4424-b19d-571a0dd4e6e4",
@@ -428,7 +506,7 @@
       "responses": [
         {
           "uuid": "445dbd13-5bc1-4559-bd7b-1860911d7340",
-          "body": "{\n  \"status\":\"success\",\n  \"status_code\": 204,\n}",
+          "body": "",
           "latency": 0,
           "statusCode": 204,
           "label": "Reset password success",
@@ -440,31 +518,36 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "email",
               "value": "test@email.com",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "type",
               "value": "RESET",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "recovery_code",
               "value": "930823",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "password",
               "value": "test1234",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -486,31 +569,36 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "email",
               "value": "test@email.com",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "type",
               "value": "RESET",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "recovery_code",
               "value": "930823",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "password",
               "value": "test1234",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -532,31 +620,36 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "email",
               "value": "test@email.com",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "type",
               "value": "RESET",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "recovery_code",
               "value": "333333",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "password",
               "value": "test1234",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -566,8 +659,7 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "4b48a288-3c65-4b37-8ad8-7048be1a9164",
@@ -589,73 +681,85 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "rank",
               "value": "พล.ต.อ",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "affiliation",
               "value": "ผบช.ภ.3",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "first_name",
               "value": "ทดสอบ",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "last_name",
               "value": "ทดสอบ",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "email",
               "value": "test@example.com",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "phone_number",
               "value": "0999999999",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "gender",
               "value": "male",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "username",
               "value": "test",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "password",
               "value": "test1234",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "profile_url",
               "value": "https://www.pngall.com/wp-content/uploads/2016/03/Troll-Face-Meme-PNG.png",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -677,7 +781,8 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -687,8 +792,275 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
+    },
+    {
+      "uuid": "f9c32736-1805-4cd1-9ebf-78a189c074bf",
+      "documentation": "Reset User data",
+      "method": "patch",
+      "endpoint": "v1/user/:id/edit",
+      "responses": [
+        {
+          "uuid": "90532de1-392c-4336-9c1f-c6019a9ca5f8",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Reset password success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "01G3VC0T2MYBM6HA78JS1B1CW0",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "rank",
+              "value": "พล.ต.ท.",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "affiliation",
+              "value": "สนง.ผบช.ภ.3",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "test",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "test",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "test@email.com",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "phone_number",
+              "value": "0699999999",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "gender",
+              "value": "male",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "profile_url",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "828d6e0c-a03d-4b3a-bf4f-317fc2f85e4d",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            },
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "01G3VC0T2MYBM6HA78JS1B1CW0",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "type",
+              "value": "RESET",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "rank",
+              "value": "930823",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "affiliation",
+              "value": "test1234",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "firstname",
+              "value": "test",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "lastname",
+              "value": "test",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "test@email.com",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "phone_number",
+              "value": "0699999999",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "gender",
+              "value": "male",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "6e812bab-154b-4dc2-9473-1b5ec6c2d71b",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"invalid user id\"\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "User invalid",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "64816133185666d",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "rank",
+              "value": "พล.ต.ท.s",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "affiliation",
+              "value": "ผบช.ภ.3s",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "tests",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "tests",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "test@email.coms",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "phone_number",
+              "value": "0699999999",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "gender",
+              "value": "male",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "profile_url",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     },
     {
       "uuid": "44ecd07c-ddb0-4539-b7cc-819d02ad2756",
@@ -698,7 +1070,7 @@
       "responses": [
         {
           "uuid": "30fd8fed-cfed-4b97-8938-5bdc243f08e5",
-          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"summary\": {\n      \"residents\": {\n        \"total\": 268,\n        \"move_in_last_month\": 42,\n        \"move_out_last_month\": 12\n      },\n      \"rooms\": {\n        \"empty\": 25\n      },\n      \"billings\": {\n        \"electricity\": {\n          \"zones\": {\n            \"center\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"angtadang\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"suranarai\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            }\n          }\n        },\n        \"water\": {\n          \"zones\": {\n            \"center\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"angtadang\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            },\n            \"suranarai\": {\n              \"jan\": 4564,\n              \"feb\": 5345,\n              \"mar\": 7894,\n              \"apr\": 2005,\n              \"may\": 4562,\n              \"jun\": 5821,\n              \"jul\": 2354,\n              \"aug\": 2548,\n              \"sep\": 1535,\n              \"oct\": 4521,\n              \"nov\": 4568,\n              \"dec\": 8866\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+          "body": "{\r\n  \"status\": \"success\",\r\n  \"status_code\": 200,\r\n  \"result\": {\r\n    \"summary\": {\r\n      \"residents\": {\r\n        \"total\": 268,\r\n        \"move_in_last_month\": 42,\r\n        \"move_out_last_month\": 12\r\n      },\r\n      \"rooms\": {\r\n        \"empty\": 25\r\n      },\r\n      \"billings\": {\r\n        \"electricity\": {\r\n          \"zones\": {\r\n            \"center\": {\r\n              \"jan\": 4564,\r\n              \"feb\": 5345,\r\n              \"mar\": 7894,\r\n              \"apr\": 2005,\r\n              \"may\": 4562,\r\n              \"jun\": 5821,\r\n              \"jul\": 2354,\r\n              \"aug\": 2548,\r\n              \"sep\": 1535,\r\n              \"oct\": 4521,\r\n              \"nov\": 4568,\r\n              \"dec\": 8866\r\n            },\r\n            \"angtadang\": {\r\n              \"jan\": 4564,\r\n              \"feb\": 5345,\r\n              \"mar\": 7894,\r\n              \"apr\": 2005,\r\n              \"may\": 4562,\r\n              \"jun\": 5821,\r\n              \"jul\": 2354,\r\n              \"aug\": 2548,\r\n              \"sep\": 1535,\r\n              \"oct\": 4521,\r\n              \"nov\": 4568,\r\n              \"dec\": 8866\r\n            },\r\n            \"suranarai\": {\r\n              \"jan\": 4564,\r\n              \"feb\": 5345,\r\n              \"mar\": 7894,\r\n              \"apr\": 2005,\r\n              \"may\": 4562,\r\n              \"jun\": 5821,\r\n              \"jul\": 2354,\r\n              \"aug\": 2548,\r\n              \"sep\": 1535,\r\n              \"oct\": 4521,\r\n              \"nov\": 4568,\r\n              \"dec\": 8866\r\n            }\r\n          }\r\n        },\r\n        \"water\": {\r\n          \"zones\": {\r\n            \"center\": {\r\n              \"jan\": 4564,\r\n              \"feb\": 5345,\r\n              \"mar\": 7894,\r\n              \"apr\": 2005,\r\n              \"may\": 4562,\r\n              \"jun\": 5821,\r\n              \"jul\": 2354,\r\n              \"aug\": 2548,\r\n              \"sep\": 1535,\r\n              \"oct\": 4521,\r\n              \"nov\": 4568,\r\n              \"dec\": 8866\r\n            },\r\n            \"angtadang\": {\r\n              \"jan\": 4564,\r\n              \"feb\": 5345,\r\n              \"mar\": 7894,\r\n              \"apr\": 2005,\r\n              \"may\": 4562,\r\n              \"jun\": 5821,\r\n              \"jul\": 2354,\r\n              \"aug\": 2548,\r\n              \"sep\": 1535,\r\n              \"oct\": 4521,\r\n              \"nov\": 4568,\r\n              \"dec\": 8866\r\n            },\r\n            \"suranarai\": {\r\n              \"jan\": 4564,\r\n              \"feb\": 5345,\r\n              \"mar\": 7894,\r\n              \"apr\": 2005,\r\n              \"may\": 4562,\r\n              \"jun\": 5821,\r\n              \"jul\": 2354,\r\n              \"aug\": 2548,\r\n              \"sep\": 1535,\r\n              \"oct\": 4521,\r\n              \"nov\": 4568,\r\n              \"dec\": 8866\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Get overview data success",
@@ -710,13 +1082,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -738,7 +1112,8 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -760,13 +1135,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -776,8 +1153,151 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
+    },
+    {
+      "uuid": "b8ac06f7-719c-4d66-98a9-ddd6cf052ed6",
+      "documentation": "Export overviews",
+      "method": "post",
+      "endpoint": "v1/overviews/exports",
+      "responses": [
+        {
+          "uuid": "6a7696d9-593c-4f84-8af8-e08c4e3f9309",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Exported",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "date_selected",
+              "value": "[\"2022-01\",\"2022-02\"]",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "info_selected",
+              "value": "[\"total\",\"empty\"]",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "c57025ac-5328-443e-beda-4a1e95ee2012",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"some record does not have calculated status\"\n}\n",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validate failed",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billings_id",
+              "value": "[\"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "18b05ded-b27d-4b52-a170-3c4646434822",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "0a5ce6b5-83e0-4c1f-997b-e019c83fc78a",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     },
     {
       "uuid": "9b003ffb-f299-4267-9733-b6fd06e39c82",
@@ -787,7 +1307,7 @@
       "responses": [
         {
           "uuid": "95cd01d5-eb46-4d2c-8a18-6b0b8101983c",
-          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"billings\": [\n      {\n        \"id\": \"28b03f51-fd0c-42fe-affd-28374333a4ad\",\n        \"rank\": \"พล.ต.อ.\",\n        \"first_name\": \"ชัชชาช้า\",\n        \"last_name\": \"ชัชชาวาน\",\n        \"zone\": \"เขตสุรนารายณ์\",\n        \"building\": \"2/20\",\n        \"room\": \"2\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"1234\",\n        \"meter_no\": \"1234\",\n        \"billing_cycle\": \"2022-03\",\n        \"unit\": 1,\n        \"price\": 30.0,\n        \"price_diff\": 50.0,\n        \"total_pay\": 80.0,\n        \"status\": \"draft\"\n      },\n      {\n        \"id\": \"49d7c651-3ed2-4ce3-b5dc-7705826867b8\",\n        \"rank\": \"ด.ต.หญิง\",\n        \"first_name\": \"ภัทรพร\",\n        \"last_name\": \"ศรีโอภาส\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"103\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"4567\",\n        \"meter_no\": \"4567\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 19.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 44.34,\n        \"status\": \"exported\"\n      },\n      {\n        \"id\": \"5cfc37d4-6258-4536-9f19-de4bd821a353\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"อมร \",\n        \"last_name\": \"ภูมพฤกษ์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"107\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"7540\",\n        \"meter_no\": \"7540\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 57.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 82.34,\n        \"status\": \"draft\"\n      },\n      {\n        \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"อดุล \",\n        \"last_name\": \"วงศ์ทอง\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"202\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"9856\",\n        \"meter_no\": \"9856\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"draft\"\n      },\n      {\n        \"id\": \"afef4eef-770b-4d85-80ee-5fd46854c063\",\n        \"rank\": \"ร.ต.ท.\",\n        \"first_name\": \"จรัส \",\n        \"last_name\": \"สิมฤทธิ์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"206\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"3214\",\n        \"meter_no\": \"3214\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"fd2724bf-9583-4c7e-9846-a152e546f844\",\n        \"rank\": \"ส.ต.อ.\",\n        \"first_name\": \"ธิชากร \",\n        \"last_name\": \"ผินดอน\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"305\",\n        \"water_zone\": \"ป.83\",\n        \"water_no\": \"5467\",\n        \"meter_no\": \"5467\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 76.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 101.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"e39b0ac2-f700-43e5-ac2e-37f23199706b\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"รุ่ง \",\n        \"last_name\": \"โฉมกิ่ง\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"402\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"8520\",\n        \"meter_no\": \"8520\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"378ae21e-b82f-4c35-8979-30125fd5bbd0\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"อนุชา \",\n        \"last_name\": \"ฝากชัยภูมิ\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"413\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"7845\",\n        \"meter_no\": \"7845\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 152.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 177.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"f24d9329-a0b8-4aa3-beba-b9db5e1aa0f6\",\n        \"rank\": \"ส.ต.อ.\",\n        \"first_name\": \"รัฐพนย์ \",\n        \"last_name\": \"เรื่องเรือ\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"504\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"3568\",\n        \"meter_no\": \"3568\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"dbb737de-7415-4775-a53b-a3fcb1b0c058\",\n        \"rank\": \"ร.ต.ท.\",\n        \"first_name\": \"อิทธิพล\",\n        \"last_name\": \"เพ็ญเติมพันธ์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"514\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"5568\",\n        \"meter_no\": \"5568\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 95.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 120.34,\n        \"status\": \"calculated\"\n      },\n      {\n        \"id\": \"8e1e01cb-c0eb-4433-b5bd-3c57e1e5bec2\",\n        \"rank\": \"ด.ต.\",\n        \"first_name\": \"ไพโรจน์\",\n        \"last_name\": \"ทนปรางค์\",\n        \"zone\": \"เขตอัษฎางค์\",\n        \"building\": \"2/19\",\n        \"room\": \"515\",\n        \"water_zone\": \"ป.1\",\n        \"water_no\": \"1123\",\n        \"meter_no\": \"1123\",\n        \"billing_cycle\": \"2021-06\",\n        \"unit\": 1,\n        \"price\": 19.0,\n        \"price_diff\": 25.34,\n        \"total_pay\": 44.34,\n        \"status\": \"calculated\"\n      }\n    ]\n  }\n}\n",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n\n  \"result\": {\n      \"billings\": [\n        {\n          \"id\": \"28b03f51-fd0c-42fe-affd-28374333a4ad\",\n          \"rank\": \"พล.ต.อ.\",\n          \"first_name\": \"ชัชชาช้า\",\n          \"last_name\": \"ชัชชาวาน\",\n          \"zone\": \"เขตสุรนารายณ์\",\n          \"building\": \"2/20\",\n          \"room\": \"2\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"1234\",\n          \"meter_no\": \"1234\",\n          \"billing_cycle\": \"2022-03\",\n          \"unit\": 1,\n          \"price\": 30.0,\n          \"price_diff\": 50.0,\n          \"total_pay\": 80.0,\n          \"status\": \"draft\"\n        },\n        {\n          \"id\": \"49d7c651-3ed2-4ce3-b5dc-7705826867b8\",\n          \"rank\": \"ด.ต.หญิง\",\n          \"first_name\": \"ภัทรพร\",\n          \"last_name\": \"ศรีโอภาส\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"103\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"4567\",\n          \"meter_no\": \"4567\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 19.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 44.34,\n          \"status\": \"exported\"\n        },\n        {\n          \"id\": \"5cfc37d4-6258-4536-9f19-de4bd821a353\",\n          \"rank\": \"ด.ต.\",\n          \"first_name\": \"อมร \",\n          \"last_name\": \"ภูมพฤกษ์\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"107\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"7540\",\n          \"meter_no\": \"7540\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 57.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 82.34,\n          \"status\": \"draft\"\n        },\n        {\n          \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\n          \"rank\": \"ด.ต.\",\n          \"first_name\": \"อดุล \",\n          \"last_name\": \"วงศ์ทอง\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"202\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"9856\",\n          \"meter_no\": \"9856\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 95.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 120.34,\n          \"status\": \"draft\"\n        },\n        {\n          \"id\": \"afef4eef-770b-4d85-80ee-5fd46854c063\",\n          \"rank\": \"ร.ต.ท.\",\n          \"first_name\": \"จรัส \",\n          \"last_name\": \"สิมฤทธิ์\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"206\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"3214\",\n          \"meter_no\": \"3214\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 95.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 120.34,\n          \"status\": \"calculated\"\n        },\n        {\n          \"id\": \"fd2724bf-9583-4c7e-9846-a152e546f844\",\n          \"rank\": \"ส.ต.อ.\",\n          \"first_name\": \"ธิชากร \",\n          \"last_name\": \"ผินดอน\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"305\",\n          \"water_zone\": \"ป.83\",\n          \"water_no\": \"5467\",\n          \"meter_no\": \"5467\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 76.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 101.34,\n          \"status\": \"calculated\"\n        },\n        {\n          \"id\": \"e39b0ac2-f700-43e5-ac2e-37f23199706b\",\n          \"rank\": \"ด.ต.\",\n          \"first_name\": \"รุ่ง \",\n          \"last_name\": \"โฉมกิ่ง\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"402\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"8520\",\n          \"meter_no\": \"8520\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 95.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 120.34,\n          \"status\": \"calculated\"\n        },\n        {\n          \"id\": \"378ae21e-b82f-4c35-8979-30125fd5bbd0\",\n          \"rank\": \"ด.ต.\",\n          \"first_name\": \"อนุชา \",\n          \"last_name\": \"ฝากชัยภูมิ\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"413\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"7845\",\n          \"meter_no\": \"7845\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 152.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 177.34,\n          \"status\": \"calculated\"\n        },\n        {\n          \"id\": \"f24d9329-a0b8-4aa3-beba-b9db5e1aa0f6\",\n          \"rank\": \"ส.ต.อ.\",\n          \"first_name\": \"รัฐพนย์ \",\n          \"last_name\": \"เรื่องเรือ\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"504\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"3568\",\n          \"meter_no\": \"3568\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 95.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 120.34,\n          \"status\": \"calculated\"\n        },\n        {\n          \"id\": \"dbb737de-7415-4775-a53b-a3fcb1b0c058\",\n          \"rank\": \"ร.ต.ท.\",\n          \"first_name\": \"อิทธิพล\",\n          \"last_name\": \"เพ็ญเติมพันธ์\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"514\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"5568\",\n          \"meter_no\": \"5568\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 95.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 120.34,\n          \"status\": \"calculated\"\n        },\n        {\n          \"id\": \"8e1e01cb-c0eb-4433-b5bd-3c57e1e5bec2\",\n          \"rank\": \"ด.ต.\",\n          \"first_name\": \"ไพโรจน์\",\n          \"last_name\": \"ทนปรางค์\",\n          \"zone\": \"เขตอัษฎางค์\",\n          \"building\": \"2/19\",\n          \"room\": \"515\",\n          \"water_zone\": \"ป.1\",\n          \"water_no\": \"1123\",\n          \"meter_no\": \"1123\",\n          \"billing_cycle\": \"2021-06\",\n          \"unit\": 1,\n          \"price\": 19.0,\n          \"price_diff\": 25.34,\n          \"total_pay\": 44.34,\n          \"status\": \"calculated\"\n        }\n      ]\n  }\n}\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Get all water billings",
@@ -799,19 +1319,22 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "query",
               "modifier": "date",
               "value": "2022-07-29",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -833,19 +1356,22 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "query",
               "modifier": "date",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -867,7 +1393,8 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -889,13 +1416,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -905,8 +1434,7 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "7fcdde27-a8f8-4780-a858-05b945533327",
@@ -916,7 +1444,7 @@
       "responses": [
         {
           "uuid": "2a9ae305-2bcb-4ece-a957-2c382faeaab8",
-          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}\n",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}",
           "latency": 0,
           "statusCode": 201,
           "label": "Caculated",
@@ -928,25 +1456,29 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "waterZoneID",
               "value": "8986bce7-5831-48ad-bfb2-5d572d35a8b6",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "price",
               "value": "2022.22",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -968,25 +1500,29 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "waterZoneID",
               "value": "9934143f-e5ff-45d8-a78b-bd6a330af6ad",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "price",
               "value": "2022.22",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -1008,7 +1544,8 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -1030,13 +1567,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -1046,8 +1585,133 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
+    },
+    {
+      "uuid": "2b69260d-8c1c-4681-8cf1-243dce57c57a",
+      "documentation": "Edit water billing",
+      "method": "patch",
+      "endpoint": "v1/billdings/water/edit/",
+      "responses": [
+        {
+          "uuid": "08c188a9-e5c2-4c5e-b6d2-4be5b15269fd",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Reset password success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "28b03f51-fd0c-42fe-affd-28374333a4ad",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "unit",
+              "value": "11",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "111",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "in_progess",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billing_cycle",
+              "value": "2022-09",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a4bdbc76-4301-49b1-abac-7a3fdec26c5a",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            },
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "test@email.com",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "unit",
+              "value": "RESET",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "930823",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "test1234",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billing_cycle",
+              "value": "2022-09",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     },
     {
       "uuid": "5dc7d651-bab9-45db-a779-7f225f87c783",
@@ -1057,31 +1721,34 @@
       "responses": [
         {
           "uuid": "776b3174-d513-4898-9575-c07ef6402301",
-          "body": "",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}",
           "latency": 0,
           "statusCode": 201,
           "label": "Exported",
           "headers": [],
-          "filePath": "/Users/yutthasard/Workspace/bms/mockoon/README.md",
+          "filePath": "",
           "sendFileAsBody": false,
           "rules": [
             {
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "billings_id",
               "value": "[\"193fd130-9e35-4ab0-9a0f-ef5a72b912eb\", \"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -1103,19 +1770,22 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "xxx-refresh-token",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "body",
               "modifier": "billings_id",
               "value": "[\"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -1137,7 +1807,8 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
@@ -1159,13 +1830,15 @@
               "target": "header",
               "modifier": "x-api-key",
               "value": "xxx-api-key",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "header",
               "modifier": "x-refresh-token",
               "value": "",
-              "operator": "null"
+              "operator": "null",
+              "invert": false
             }
           ],
           "rulesOperator": "AND",
@@ -1175,8 +1848,2251 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
+    },
+    {
+      "uuid": "a75ccfc6-bc36-40f7-b7ec-d6f441622c66",
+      "documentation": "Get billings (Electric)",
+      "method": "get",
+      "endpoint": "v1/billings/electric",
+      "responses": [
+        {
+          "uuid": "a1322045-17a9-408a-ae26-7bb1c79e21f7",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200,\r\n    \"result\": {\r\n        \"billings\": [\r\n            {\r\n                \"id\": \"28b03f51-fd0c-42fe-affd-28374333a4ad\",\r\n                \"rank\": \"ด.ต.หญิง\",\r\n                \"first_name\": \"อธิวัฒน์ \",\r\n                \"last_name\": \"เจิมสูงเนิน\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"132\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200190919501\",\r\n                \"electricity_meter_no\": \"20019091950\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 323.6,\r\n                \"unit\": \"91\",\r\n                \"status\": \"draft\"\r\n            },\r\n            {\r\n                \"id\": \"49d7c651-3ed2-4ce3-b5dc-7705826867b8\",\r\n                \"rank\": \"จ.ส.ต.\",\r\n                \"first_name\": \"ยุพาพร \",\r\n                \"last_name\": \"พวงมะเทศ\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"133\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200190955212\",\r\n                \"electricity_meter_no\": \"20019095521\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 742.29,\r\n                \"unit\": \"21\",\r\n                \"status\": \"draft\"\r\n            },\r\n            {\r\n                \"id\": \"5cfc37d4-6258-4536-9f19-de4bd821a353\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"เทวราช \",\r\n                \"last_name\": \"ดวงทอง\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"138\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200190955393\",\r\n                \"electricity_meter_no\": \"20019095539\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": \"0.00\",\r\n                \"unit\": \"91\",\r\n                \"status\": \"in_progess\"\r\n            },\r\n            {\r\n                \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"สุรพงษ์ \",\r\n                \"last_name\": \"ทั่งทอง\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"140\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200187439364\",\r\n                \"electricity_meter_no\": \"20018743936\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 33.34,\r\n                \"unit\": \"38\",\r\n                \"status\": \"in_progess\"\r\n            },\r\n            {\r\n                \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"จิรสิทธ์ \",\r\n                \"last_name\": \"ภูอ่าง\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"142\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130597255\",\r\n                \"electricity_meter_no\": \"20013059725\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 1068.8,\r\n                \"unit\": \"74\",\r\n                \"status\": \"in_progess\"\r\n            },\r\n            {\r\n                \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\r\n                \"rank\": \"ร.ต.ท.\",\r\n                \"first_name\": \"วุฒิชัย \",\r\n                \"last_name\": \"บุญใบ\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"148\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130599746\",\r\n                \"electricity_meter_no\": \"20013059974\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 220.21,\r\n                \"unit\": \"98\",\r\n                \"status\": \"in_progess\"\r\n            },\r\n            {\r\n                \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\r\n                \"rank\": \"พ.ต.อ.\",\r\n                \"first_name\": \"ธรรมศธรรม \",\r\n                \"last_name\": \"นาคมณี\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"22\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130694277\",\r\n                \"electricity_meter_no\": \"20013069427\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 153.5,\r\n                \"unit\": \"91\",\r\n                \"status\": \"in_progess\"\r\n            },\r\n            {\r\n                \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\r\n                \"rank\": \"พ.ต.อ.\",\r\n                \"first_name\": \"สุพล \",\r\n                \"last_name\": \"สุราวุฒิ\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"23\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130694548\",\r\n                \"electricity_meter_no\": \"20013069454\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 40.9,\r\n                \"unit\": \"61\",\r\n                \"status\": \"in_progess\"\r\n            },\r\n            {\r\n                \"id\": \"6e725894-e0f7-427a-8a42-50c3150f06ad\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"พีรันธร \",\r\n                \"last_name\": \"ก้านขุนทด\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"24\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130695249\",\r\n                \"electricity_meter_no\": \"20013069524\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": 829.37,\r\n                \"unit\": \"31\",\r\n                \"status\": \"in_progess\"\r\n            },\r\n            {\r\n                \"id\": \"dbb737de-7415-4775-a53b-a3fcb1b0c058\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"อักษร \",\r\n                \"last_name\": \"ทองวิจิตร\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"26\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130696190\",\r\n                \"electricity_meter_no\": \"20013069619\",\r\n                \"billing_cycle\": \"2021-06\",\r\n                \"price\": \"0.00\",\r\n                \"unit\": \"91\",\r\n                \"status\": \"in_progess\"\r\n            }\r\n        ]\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all electric billings",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "2022-07-29",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "12ab63b6-d179-4877-b43e-ab57ea3582e6",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"billings\": []\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all electric billings - Not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "413ee21f-485e-4791-bc75-4753615bd6e3",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "f33d1d3e-979d-4089-9b82-e81b6e5d4f35",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b2b16089-e031-4abf-b2f1-df70993584f2",
+      "documentation": "Export electric billings",
+      "method": "post",
+      "endpoint": "v1/billings/electric/exports",
+      "responses": [
+        {
+          "uuid": "7af2085e-0846-4d14-83d9-750d971b37f1",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Exported",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billings_id",
+              "value": "[\"193fd130-9e35-4ab0-9a0f-ef5a72b912eb\", \"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "156ef6f8-0812-4a95-95d8-daed7ffb1a23",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"some record does not have calculated status\"\n}\n",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validate failed",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billings_id",
+              "value": "[\"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a892982d-aa9d-4c7d-91ef-b2c2992ec78e",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "e8390766-7112-4c4b-b7cd-7885a46ecacd",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "90bc8a56-e1af-499d-9746-e39e853d4963",
+      "documentation": "Edit electricbilling",
+      "method": "patch",
+      "endpoint": "v1/billdings/electric/edit/",
+      "responses": [
+        {
+          "uuid": "9254eed2-e346-4ea3-8ec5-c829c579988b",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Reset password success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "28b03f51-fd0c-42fe-affd-28374333a4ad",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "unit",
+              "value": "11",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "111",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "in_progess",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billing_cycle",
+              "value": "2022-09",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "f12a7925-72bb-4fb4-b161-8cc09ae39ca2",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            },
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "test@email.com",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "unit",
+              "value": "RESET",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "930823",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "test1234",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billing_cycle",
+              "value": "2022-09",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "abddd9e6-7212-40c9-9ad2-bb28b87003e6",
+      "documentation": "Get history (Electric)",
+      "method": "get",
+      "endpoint": "v1/billings/history",
+      "responses": [
+        {
+          "uuid": "386ae5c4-8ca8-4ae5-92d4-6c24d7bfb7d2",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200,\r\n    \"result\": {\r\n        \"electric\": {\r\n            \"history\": [\r\n                {\r\n                    \"id\": \"23d3d458-0b7d-4ebe-a9a5-a6f3c887e81e\",\r\n                    \"date\": \"2022/1\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"fd427a99-2da4-4a0e-87bf-5972a0cb7e1f\",\r\n                    \"date\": \"2022/2\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"5199dba3-9258-4292-b290-10739e055e8e\",\r\n                    \"date\": \"2022/3\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"4295c6ce-665a-4036-a973-787cbcb3161e\",\r\n                    \"date\": \"2022/4\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"097b9c55-4bac-4a5a-bb65-a7022dc79658\",\r\n                    \"date\": \"2022/5\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"4107caf8-3d98-442f-893d-a3370cacb6a4\",\r\n                    \"date\": \"2022/6\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"8aa44445-dbe8-4c1a-a6c4-37801c82cf2f\",\r\n                    \"date\": \"2022/7\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"135c857b-ae71-4da8-97ce-e460d11397dc\",\r\n                    \"date\": \"2022/8\",\r\n                    \"unit\": 10,\r\n                    \"total_price\":40\r\n                }\r\n            ]\r\n        },\r\n        \"water\": {\r\n            \"history\": [\r\n                {\r\n                    \"id\": \"5c71ff76-fab3-4f17-8df4-e5fff6548746\",\r\n                    \"date\": \"2022/1\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"db02a415-2168-452d-8095-174e098d59c5\",\r\n                    \"date\": \"2022/2\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"a4de8e97-09f2-48a7-94f5-386abe9c2f15\",\r\n                    \"date\": \"2022/3\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"7036706a-1409-45dd-beb6-0c0d92544216\",\r\n                    \"date\": \"2022/4\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"cb1044f9-47ec-43b5-a863-26a0b292de4f\",\r\n                    \"date\": \"2022/5\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"bf9b03e4-d649-4ec8-8189-c79cadad6c86\",\r\n                    \"date\": \"2022/6\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"878f5d56-cfed-4d3d-8937-fd43937a8415\",\r\n                    \"date\": \"2022/7\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                },\r\n                {\r\n                    \"id\": \"a87957ac-cadd-4d4d-9c81-1cda24a25d9b\",\r\n                    \"date\": \"2022/8\",\r\n                    \"unit\": 10,\r\n                    \"price_diff\": 30,\r\n                    \"total_price\":40\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all billings history once user",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "rank",
+              "value": "พล.ต.อ.",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "first_name",
+              "value": "test",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "last_name",
+              "value": "test",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "4bbbf7dd-f0ac-4633-8832-eb7c1bcb912b",
+          "body": "{\r\n  \"status\": \"success no data\",\r\n  \"status_code\": 200,\r\n  \"result\": {\r\n    \"history\": []\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all electric billings history - Not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "rank",
+              "value": "พล.ต.อ.",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "first_name",
+              "value": "ss",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "last_name",
+              "value": "ss",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b2b8034f-9661-4fc4-8991-878ac3b92a61",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "92ac3178-d03d-40a0-af6f-6e1e83aba85b",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "e82c7677-ce89-420f-8f61-172ec80343af",
+      "documentation": "Get all Building",
+      "method": "get",
+      "endpoint": "v1/buildings",
+      "responses": [
+        {
+          "uuid": "d79cf26b-e218-4168-abf5-acce669283cc",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200,\r\n    \"result\": {\r\n        \"buildings\": [\r\n            {\r\n                \"id\": \"a4fca559-6f5a-4d7c-9434-b1c0e08c0b62\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"132\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200190919501\",\r\n                \"electricity_meter_no\": \"20019091950\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"single\"\r\n            },\r\n            {\r\n                \"id\": \"a06a4698-9c16-4443-98ad-a25fa08f7f29\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"rank\": \"จ.ส.ต.\",\r\n                \"first_name\": \"ยุพาพร \",\r\n                \"last_name\": \"พวงมะเทศ\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"133\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200190955212\",\r\n                \"electricity_meter_no\": \"20019095521\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"not_empty\",\r\n                \"room_type\": \"single\"\r\n            },\r\n            {\r\n                \"id\": \"0c9949b9-3403-463f-a9b2-cd88f3177576\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"138\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200190955393\",\r\n                \"electricity_meter_no\": \"20019095539\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"single\"\r\n            },\r\n            {\r\n                \"id\": \"18e5408f-fc62-4cf3-b749-4f835ee130d7\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"140\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200187439364\",\r\n                \"electricity_meter_no\": \"20018743936\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"not_empty\",\r\n                \"room_type\": \"single\"\r\n            },\r\n            {\r\n                \"id\": \"e83f9be4-0299-48d4-a324-b7936a4e8e3a\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"142\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130597255\",\r\n                \"electricity_meter_no\": \"20013059725\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"single\"\r\n            },\r\n            {\r\n                \"id\": \"ab96587d-6315-4448-82a8-fe2d0f8b7cfb\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"148\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130599746\",\r\n                \"electricity_meter_no\": \"20013059974\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"single\"\r\n            },\r\n            {\r\n                \"id\": \"885e754f-00b0-4585-8868-f86cbab698cc\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"22\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130694277\",\r\n                \"electricity_meter_no\": \"20013069427\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"single\"\r\n            },\r\n            {\r\n                \"id\": \"e52dbe2f-d367-4dc8-9c2b-b6073a3bd81f\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"23\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130694548\",\r\n                \"electricity_meter_no\": \"20013069454\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"family_2\"\r\n            },\r\n            {\r\n                \"id\": \"94ac6616-3fc8-421e-baea-c983f0ad4131\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"24\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130695249\",\r\n                \"electricity_meter_no\": \"20013069524\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"family_1\"\r\n            },\r\n            {\r\n                \"id\": \"7dcf9fad-1b53-4ad3-a49f-5ceb7a0c012e\",\r\n                \"water_zone\": \"ป.1\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"26\",\r\n                \"meter_group\": \"9040\",\r\n                \"electricity_no\": \"200130696190\",\r\n                \"electricity_meter_no\": \"20013069619\",\r\n                \"water_no\": \"1234\",\r\n                \"meter_no\": \"1234\",\r\n                \"status\": \"empty\",\r\n                \"room_type\": \"family_1\"\r\n            }\r\n        ]\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all building",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "2022-07-29",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a6fdd4a1-a9c4-4fd0-980b-a668620c30dd",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"billings\": []\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all electric billings - Not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "2b2a729b-1e1c-4b30-abea-0cf1818d25be",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "7aee27db-7d3f-4190-8297-8f0554249a3e",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "72f80fab-ce57-43cc-9425-118a6247a13b",
+      "documentation": "Add building data",
+      "method": "post",
+      "endpoint": "v1/building/add",
+      "responses": [
+        {
+          "uuid": "d1507c6e-4709-426f-b4e4-1d6b4b14e850",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "building create success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "water_zone",
+              "value": "ป.1",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "zone",
+              "value": "เขตส่วนกลาง",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "building",
+              "value": "2/11",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "room_no",
+              "value": "97",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_no",
+              "value": "111111111111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_meter_no",
+              "value": "11111111111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_no",
+              "value": "1111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_meter_no",
+              "value": "1111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "room_type",
+              "value": "single",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "empty",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "4151cab5-dc16-4698-b52c-01a33bb70545",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "e54d94a0-e145-4e4b-8243-558bc74af339",
+      "documentation": "delete select Resident ",
+      "method": "delete",
+      "endpoint": "v1/delete/room",
+      "responses": [
+        {
+          "uuid": "27b728b2-ec7b-44c7-a7d0-e3e8f6a411e6",
+          "body": "{\r\n    \"status\": \"bad_request\",\r\n    \"status_code\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "6e644faf-69e5-40ed-8c02-938a3266f54f",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "deleted",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "rooms_id",
+              "value": "[\"a4fca559-6f5a-4d7c-9434-b1c0e08c0b62\",\"a06a4698-9c16-4443-98ad-a25fa08f7f29\",\"0c9949b9-3403-463f-a9b2-cd88f3177576\"]",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "4273954f-d734-42b8-ad83-83d65541e3df",
+      "documentation": "Edit building room",
+      "method": "patch",
+      "endpoint": "v1/building/edit",
+      "responses": [
+        {
+          "uuid": "0c038e42-8bbb-4a10-8653-7a930ba06e69",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Edit building room success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "28b03f51-fd0c-42fe-affd-28374333a4ad",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "water_zone",
+              "value": "ป.1",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "zone",
+              "value": "เขตสุรนารายณ์",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "building",
+              "value": "2/36",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "room_no",
+              "value": "132",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_no",
+              "value": "11111111111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_meter_no",
+              "value": "111111111111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_no",
+              "value": "1213",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "meter_no",
+              "value": "1234",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "room_type",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "c5fb3e62-d4dc-46fb-9a23-6d535c608cfb",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "28b03f51-fd0c-42fe-affd-28374333a4ad",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "water_zone",
+              "value": "ป.1",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "zone",
+              "value": "เขตสุรนารายณ์",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "building",
+              "value": "2/36",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "room_no",
+              "value": "132",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_no",
+              "value": "200190919501",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_meter_no",
+              "value": "20019091950",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_no",
+              "value": "1234",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "meter_no",
+              "value": "1235",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "room_type",
+              "value": "single",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "empty",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "15d74c24-6fd8-4e86-a9c2-a80b493dcf4a",
+      "documentation": "Export buildings",
+      "method": "post",
+      "endpoint": "v1/buildings/exports",
+      "responses": [
+        {
+          "uuid": "a1124d39-60f8-4142-9ee1-c6241ed73fe5",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Exported",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "rooms_id",
+              "value": "[\"a4fca559-6f5a-4d7c-9434-b1c0e08c0b62\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "1941a140-8523-4f50-a8a7-4d95e99c6b80",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"some record does not have calculated status\"\n}\n",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validate failed",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billings_id",
+              "value": "[\"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "fbd1048f-4a75-4065-9d7e-515c83739cc7",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "2211b1c3-2e71-42d3-b554-e7a872fab39d",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "cfb5d6f1-8658-4b0e-a9bd-f550479de4e7",
+      "documentation": "Get all resident",
+      "method": "get",
+      "endpoint": "v1/resident",
+      "responses": [
+        {
+          "uuid": "70cfd524-3783-4454-8e19-5d0ce00df061",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200,\r\n    \"result\": {\r\n        \"resident\": [\r\n            {\r\n                \"id\": \"347d2d20-3ed9-4544-81fe-e2a820837b17\",\r\n                \"rank\": \"ด.ต.หญิง\",\r\n                \"first_name\": \"อธิวัฒน์ \",\r\n                \"last_name\": \"เจิมสูงเนิน\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"132\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200190919501\",\r\n                \"electricity_meter_no\": \"20019091950\",\r\n                \"room_type\": \"single\",\r\n                \"water_zone\": \"ป.1\"\r\n            },\r\n            {\r\n               \"id\": \"105653e1-7465-40c9-94c2-e3b102321f67\",\r\n                \"rank\": \"จ.ส.ต.\",\r\n                \"first_name\": \"ยุพาพร \",\r\n                \"last_name\": \"พวงมะเทศ\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"133\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200190955212\",\r\n                \"electricity_meter_no\": \"20019095521\",\r\n                \"room_type\": \"single\",\r\n                \"water_zone\": \"ป.1\"\r\n            },\r\n            {\r\n               \"id\": \"c5062785-4372-4ebf-9420-267441de6053\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"เทวราช \",\r\n                \"last_name\": \"ดวงทอง\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/36\",\r\n                \"room_no\": \"138\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200190955393\",\r\n                \"electricity_meter_no\": \"20019095539\",\r\n                \"room_type\": \"single\",\r\n                \"water_zone\": \"ป.1\"\r\n            },\r\n            {\r\n               \"id\": \"03a9d3af-bcda-4ac2-9c24-9490bc3a33e6\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"สุรพงษ์ \",\r\n                \"last_name\": \"ทั่งทอง\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"140\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200187439364\",\r\n                \"electricity_meter_no\": \"20018743936\",\r\n                \"room_type\": \"single\",\r\n                \"water_zone\": \"ป.1\"\r\n            },\r\n            {\r\n               \"id\": \"e848854b-b94c-489f-bd1e-727abbb5e618\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"จิรสิทธ์ \",\r\n                \"last_name\": \"ภูอ่าง\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"142\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200130597255\",\r\n                \"electricity_meter_no\": \"20013059725\",\r\n                \"room_type\": \"family_2\",\r\n                \"water_zone\": \"ป.1\"\r\n            },\r\n            {\r\n               \"id\": \"bd62dee1-82c3-4762-bd85-bf6a27961989\",\r\n                \"rank\": \"ร.ต.ท.\",\r\n                \"first_name\": \"วุฒิชัย \",\r\n                \"last_name\": \"บุญใบ\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/37\",\r\n                \"room_no\": \"148\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200130599746\",\r\n                \"electricity_meter_no\": \"20013059974\",\r\n                \"room_type\": \"family_2\",\r\n                \"water_zone\": \"ป.1\"\r\n            },\r\n            {\r\n               \"id\": \"650c7c4f-8274-4cef-9783-b13cca66036c\",\r\n                \"rank\": \"พ.ต.อ.\",\r\n                \"first_name\": \"ธรรมศธรรม \",\r\n                \"last_name\": \"นาคมณี\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"22\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200130694277\",\r\n                \"electricity_meter_no\": \"20013069427\",\r\n                \"room_type\": \"single\",\r\n                \"water_zone\": \"ป.84\"\r\n            },\r\n            {\r\n               \"id\": \"95a00f87-6575-4763-84ae-60a1670a422e\",\r\n                \"rank\": \"พ.ต.อ.\",\r\n                \"first_name\": \"สุพล \",\r\n                \"last_name\": \"สุราวุฒิ\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"23\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200130694548\",\r\n                \"electricity_meter_no\": \"20013069454\",\r\n                \"room_type\": \"family_1\",\r\n                \"water_zone\": \"ป.1\"\r\n            },\r\n            {\r\n               \"id\": \"2b19124c-920e-4e07-9239-74308e10ee12\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"พีรันธร \",\r\n                \"last_name\": \"ก้านขุนทด\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"24\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200130695249\",\r\n                \"electricity_meter_no\": \"20013069524\",\r\n                \"room_type\": \"single\",\r\n                \"water_zone\": \"ป.83\"\r\n            },\r\n            {\r\n               \"id\": \"8d4e7e24-2bec-4d40-8e0c-7deb162fbc2a\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"first_name\": \"อักษร \",\r\n                \"last_name\": \"ทองวิจิตร\",\r\n                \"zone\": \"เขตสุรนารายณ์\",\r\n                \"building\": \"2/38\",\r\n                \"room_no\": \"26\",\r\n                \"water_no\": \"1234\",\r\n                \"water_meter_no\": \"1234\",\r\n                \"electricity_no\": \"200130696190\",\r\n                \"electricity_meter_no\": \"20013069619\",\r\n                \"room_type\": \"family_1\",\r\n                \"water_zone\": \"ป.83\"\r\n            }\r\n        ]\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all resident",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "2022-07-29",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "c909dfcc-a721-4bcf-b1aa-8e7ef7dda3c0",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"billings\": []\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all resident - Not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "date",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "5c77ee1a-9100-4309-8b1e-e53cd9c9727d",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "2129cdba-3e8d-47c3-af8f-3e786a78fe87",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "0573e315-c6a2-45e3-a400-9834c51a9a0f",
+      "documentation": "Add resident data",
+      "method": "post",
+      "endpoint": "v1/resident/add",
+      "responses": [
+        {
+          "uuid": "4fbcb663-fd1c-48d1-a26e-3f79a5696f70",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201,\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Resident add success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "rank",
+              "value": "พล.ต.อ",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "ทดสอบ",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "ทดสอบ",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "water_zone",
+              "value": "ป.1",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "zone",
+              "value": "เขตส่วนกลาง",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "building",
+              "value": "2/11",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "room_no",
+              "value": "97",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_no",
+              "value": "111111111111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_meter_no",
+              "value": "11111111111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_no",
+              "value": "1111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_meter_no",
+              "value": "1111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "room_type",
+              "value": "single",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "214276b0-9d8a-419d-9f4b-76ed7a986c1b",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "bd24d8f1-a5fd-4dc4-b9c6-c54c937fbb2e",
+      "documentation": "Edit building",
+      "method": "patch",
+      "endpoint": "v1/resident/edit",
+      "responses": [
+        {
+          "uuid": "52e10f44-65f7-457e-9c4a-58d93435f7e1",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "edit ressident success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "28b03f51-fd0c-42fe-affd-28374333a4ad",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "rank",
+              "value": "พล.ต.อ.",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "ทดสอบ",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "ทดสอบ",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "water_zone",
+              "value": "ป.1",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "zone",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "building",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "room_no",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_no",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "electricity_meter_no",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_no",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "water_meter_no",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "room_type",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a8dc72d4-2085-4f50-b448-ef0cbadb5161",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            },
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "test@email.com",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "unit",
+              "value": "RESET",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "930823",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "test1234",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billing_cycle",
+              "value": "2022-09",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b7edc7fd-5bf9-4f6b-9bea-0643375c3bef",
+      "documentation": "delete select Resident ",
+      "method": "delete",
+      "endpoint": "v1/delete/resident",
+      "responses": [
+        {
+          "uuid": "6684a841-1519-4d74-9814-b21a02aa2121",
+          "body": "{\r\n    \"status\": \"bad_request\",\r\n    \"status_code\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "017dbcc8-8f31-45d2-bf77-644eb6789602",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "deleted",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "residents_id",
+              "value": "[\"347d2d20-3ed9-4544-81fe-e2a820837b17\",\"105653e1-7465-40c9-94c2-e3b102321f67\"]",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "1b287ee4-010c-4876-aca3-b6e62ae674b0",
+      "documentation": "Export resident",
+      "method": "post",
+      "endpoint": "v1/resident/exports",
+      "responses": [
+        {
+          "uuid": "25062af9-f0a0-4e20-b535-07303fdfcaf7",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 201\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Exported",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "residents_id",
+              "value": "[\"a4fca559-6f5a-4d7c-9434-b1c0e08c0b62\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "922f7e05-d20c-4a3d-ae5c-b28a2dafef9a",
+          "body": "{\n  \"status\": \"unprocessable_entity\",\n  \"status_code\": 422,\n  \"error_message\": \"some record does not have calculated status\"\n}\n",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validate failed",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billings_id",
+              "value": "[\"b5b310f6-d4f5-42ac-bbe2-a1e418594c55\", \"fecf9c0f-2a49-4546-803c-0980db450f69\"]",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "5c9ea899-d825-464f-ba37-87ce0eb4347a",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "c5d2c273-9cea-484e-8180-ded7097978c2",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "fe52f109-8ea3-41e8-aca5-c27f35848f79",
+      "documentation": "Get all user",
+      "method": "get",
+      "endpoint": "v1/users",
+      "responses": [
+        {
+          "uuid": "a110fd93-768f-42a3-ac6b-3bd143f57905",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200,\r\n    \"result\": {\r\n        \"user_lists\": [\r\n            {\r\n                \"id\": \"cfeb7456-7dc7-4204-a7aa-119f5b1a3196\",\r\n                \"rank\": \"พล.ต.อ.\",\r\n                \"affiliation\": \"สภ.เมืองนครราชสีมา\",\r\n                \"first_name\": \"ชัชชาช้า\",\r\n                \"last_name\": \"ชัชชาวาน\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"user@123.com\",\r\n                \"phone_number\": \"0896585452\"\r\n            },\r\n            {\r\n                \"id\": \"ff9b4e37-36c7-422b-9ba5-74a831445eb2\",\r\n                \"rank\": \"ด.ต.หญิง\",\r\n                \"affiliation\": \"ศพฐ.3\",\r\n                \"first_name\": \"ภัทรพร\",\r\n                \"last_name\": \"ศรีโอภาส\",\r\n                \"gender\": \"female\",\r\n                \"role\": \"admin\",\r\n                \"email\": \"smorston0@nytimes.com\",\r\n                \"phone_number\": \"0896545652\"\r\n            },\r\n            {\r\n                \"id\": \"88e82823-22af-4916-b935-b2899471f6d2\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"affiliation\": \"ศพฐ.3\",\r\n                \"first_name\": \"อมร \",\r\n                \"last_name\": \"ภูมพฤกษ์\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"mtinkler1@google.ca\",\r\n                \"phone_number\": \"0896582458\"\r\n            },\r\n            {\r\n                \"id\": \"ce11f8b4-2593-4e7d-b123-08886944d63b\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"affiliation\": \"ศพฐ.3\",\r\n                \"first_name\": \"อดุล \",\r\n                \"last_name\": \"วงศ์ทอง\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"ssmewings2@umn.edu\",\r\n                \"phone_number\": \"0896548572\"\r\n            },\r\n            {\r\n                \"id\": \"c0aa70ab-894e-4db4-9593-907abf842b0c\",\r\n                \"rank\": \"ร.ต.ท.\",\r\n                \"affiliation\": \"ศพฐ.3\",\r\n                \"first_name\": \"จรัส \",\r\n                \"last_name\": \"สิมฤทธิ์\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"asnartt3@intel.com\",\r\n                \"phone_number\": \"0995585452\"\r\n            },\r\n            {\r\n                \"id\": \"e7154583-1eed-4eaa-8706-aa9b23dbf3b9\",\r\n                \"rank\": \"ส.ต.อ.\",\r\n                \"affiliation\": \"ศพฐ.3\",\r\n                \"first_name\": \"ธิชากร \",\r\n                \"last_name\": \"ผินดอน\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"ibirkbeck4@github.com\",\r\n                \"phone_number\": \"0685585452\"\r\n            },\r\n            {\r\n                \"id\": \"f2f17460-6f5e-4a4a-94bf-77ec702e236f\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"affiliation\": \"ภ.3(ส่วนกลาง)\",\r\n                \"first_name\": \"รุ่ง \",\r\n                \"last_name\": \"โฉมกิ่ง\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"gmcgrah5@ucoz.ru\",\r\n                \"phone_number\": \"0689585452\"\r\n            },\r\n            {\r\n                \"id\": \"96cd7907-974c-4762-a2fa-3d14fe5f3e9e\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"affiliation\": \"ภ.3(ส่วนกลาง)\",\r\n                \"first_name\": \"อนุชา \",\r\n                \"last_name\": \"ฝากชัยภูมิ\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"jkirkby6@answers.com\",\r\n                \"phone_number\": \"0894587452\"\r\n            },\r\n            {\r\n                \"id\": \"54a61ae9-e8bb-4024-9e70-9e3127bb6b84\",\r\n                \"rank\": \"ส.ต.อ.\",\r\n                \"affiliation\": \"สนง.ผบช.ภ.3\",\r\n                \"first_name\": \"รัฐพนย์ \",\r\n                \"last_name\": \"เรื่องเรือ\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"fillyes7@hubpages.com\",\r\n                \"phone_number\": \"0891254452\"\r\n            },\r\n            {\r\n                \"id\": \"bf0f26f7-63c8-4af9-a35d-58b7c3aa8ab2\",\r\n                \"rank\": \"ร.ต.ท.\",\r\n                \"affiliation\": \"สนง.ผบช.ภ.3\",\r\n                \"first_name\": \"อิทธิพล\",\r\n                \"last_name\": \"เพ็ญเติมพันธ์\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"mlarmet8@mail.ru\",\r\n                \"phone_number\": \"0890256452\"\r\n            },\r\n            {\r\n                \"id\": \"e555b631-5786-4186-861b-6423f2c747c5\",\r\n                \"rank\": \"ด.ต.\",\r\n                \"affiliation\": \"ผบช.ภ.3\",\r\n                \"first_name\": \"ไพโรจน์\",\r\n                \"last_name\": \"ทนปรางค์\",\r\n                \"gender\": \"male\",\r\n                \"role\": \"user\",\r\n                \"email\": \"tgainseford9@sun.com\",\r\n                \"phone_number\": \"0805785452\"\r\n            }\r\n        ]\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all user list",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "481c74d6-56e0-4b91-8d8d-c28674f732d4",
+          "body": "{\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"result\": {\n    \"billings\": []\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Get all user - Not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "153fd90a-f269-47d4-94ee-448a23f012f4",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "d38536d2-ea69-4f07-9b86-b42393b8e97b",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid refresh token\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid refresh token",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "8080ba1a-584b-4ee0-b072-48b76e7166ac",
+      "documentation": "Edit user",
+      "method": "patch",
+      "endpoint": "v1/users/edit",
+      "responses": [
+        {
+          "uuid": "8bcac98e-a4ca-407d-9e4b-d7b804a252be",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "edit user success",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "28b03f51-fd0c-42fe-affd-28374333a4ad",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "test@email.com",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "404a6469-aa05-4e4f-951a-0cc52e7c9d0b",
+          "body": "{\n  \"status\": \"unauthorized\",\n  \"status_code\": 401,\n  \"error_message\": \"invalid API Key\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "operator": "null",
+              "invert": false
+            },
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "test@email.com",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "unit",
+              "value": "RESET",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "price",
+              "value": "930823",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "status",
+              "value": "test1234",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "billing_cycle",
+              "value": "2022-09",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "291a8806-6992-40e3-a257-65edb7c1eebe",
+      "documentation": "delete select User",
+      "method": "delete",
+      "endpoint": "v1/users/delete",
+      "responses": [
+        {
+          "uuid": "efcde9a4-74ad-4a13-a50f-478862a8b1a0",
+          "body": "{\r\n    \"status\": \"bad_request\",\r\n    \"status_code\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Invalid api key",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "2f448310-9d89-44f8-a6c2-f3c5f3ac62d3",
+          "body": "{\r\n    \"status\": \"success\",\r\n    \"status_code\": 200\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "user deleted ",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-api-key",
+              "value": "xxx-api-key",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "x-refresh-token",
+              "value": "xxx-refresh-token",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "users_id",
+              "value": "[\"347d2d20-3ed9-4544-81fe-e2a820837b17\",\"105653e1-7465-40c9-94c2-e3b102321f67\"]",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "proxyMode": false,
